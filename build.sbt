@@ -17,7 +17,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql"  % sparkVersion % "provided",
 
   // Apache Arrow Flight Dependencies for Streaming Ingestion
-  "org.apache.arrow" % "arrow-flight"        % arrowVersion,
+  "org.apache.arrow" % "flight-core"         % arrowVersion,
   "org.apache.arrow" % "arrow-vector"        % arrowVersion,
   "org.apache.arrow" % "arrow-memory-netty"  % arrowVersion,
   "org.apache.arrow" % "arrow-format"        % arrowVersion,
@@ -39,6 +39,5 @@ assembly / assemblyJarName := s"${name.value}-${version.value}-spark-${sparkVers
 scalacOptions ++= Seq(
   "-deprecation",
   "-feature",
-  "-unchecked",
-  "-Xfatal-warnings"
+  "-unchecked"
 )

@@ -39,7 +39,7 @@
         <!-- Apache Arrow Flight Client -->
         <dependency>
             <groupId>org.apache.arrow</groupId>
-            <artifactId>arrow-flight</artifactId>
+            <artifactId>flight-core</artifactId>
             <version>${arrow.version}</version>
         </dependency>
         <dependency>

@@ -3,7 +3,6 @@ package org.apache.spark.sql.gdb
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.arrow.flight.{FlightDescriptor, SyncPutListener}
 import org.apache.spark.internal.Logging
-import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.{DataFrame, Row}
 
 import java.nio.charset.StandardCharsets
@@ -73,7 +72,6 @@ object GdbSparkLoader extends Logging {
 
     val preparedDf = if (options.repartitionByRing && totalNodes > 1) {
       logInfo(s"GDB Driver: Aligning Spark partitions with $totalNodes GDB ring nodes via GdbRingPartitioner on column '$keyColName'")
-      val keyCol = col(keyColName)
       val rdd = df.rdd.map(row => (row.getAs[Any](keyColName), row))
       val partitionedRdd = rdd.partitionBy(new GdbRingPartitioner(totalNodes)).values
       df.sparkSession.createDataFrame(partitionedRdd, df.schema)
